@@ -84,7 +84,7 @@ local function kickMode()
 				end
 				task.wait(0.1)
 				for _ = 1, 10 do
-					player:Kick("BOOGABLOZxD - REPORT THIS BUG: https://discord.gg/F5WbRVWCaT")
+					player:Kick("BOOGABLOZxD - REPORT THIS BUG: https://discord.gg/F5WbREWCaT")
 					task.wait(0.2)
 				end
 			end
